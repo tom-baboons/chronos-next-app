@@ -4,6 +4,7 @@ import AppProvider from "@/providers/AppProvider";
 import { Flex } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Comfortaa } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
@@ -35,18 +36,20 @@ export default function RootLayout({
           backgroundColor: "black",
         }}
       >
-        <AppProvider>
-          <Header />
-          <Flex
-            padding={"24px"}
-            marginRight={"324px"}
-            position={"relative"}
-            top={"52px"}
-          >
-            {children}
-            <RightSidebar />
-          </Flex>
-        </AppProvider>
+        <Suspense>
+          <AppProvider>
+            <Header />
+            <Flex
+              padding={"24px"}
+              marginRight={"324px"}
+              position={"relative"}
+              top={"52px"}
+            >
+              {children}
+              <RightSidebar />
+            </Flex>
+          </AppProvider>
+        </Suspense>
       </body>
     </html>
   );
