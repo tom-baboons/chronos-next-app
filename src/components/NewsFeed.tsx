@@ -4,11 +4,21 @@ import { useState } from "react";
 import NewsCard from "./NewsCard";
 import { Switch } from "./ui/switch";
 
-type Props = {};
+type Props = {
+  newsFeed: {
+    key: string;
+    channelName: string;
+    tag: string;
+    title: string;
+    createdAt: string;
+    thumbnail: string;
+    isLive: boolean;
+  }[];
+};
 
 const newsFilter = ["All", "Live", "Video", "Radio", "Article"];
 
-const NewsFeed = (props: Props) => {
+const NewsFeed = ({ newsFeed }: Props) => {
   const [selectedNewsFilter, setSelectedNewsFilter] = useState("All");
   return (
     <Flex flexDirection="column" marginY={"12px"} gap={"12px"}>
@@ -50,7 +60,7 @@ const NewsFeed = (props: Props) => {
         </Flex>
       </Flex>
       <Flex gapX={"14px"} gapY={"16px"} flexWrap={"wrap"}>
-        {dummyNewsFeedSortTime.map((news) => (
+        {newsFeed.map((news) => (
           <NewsCard {...news} key={news.key} />
         ))}
       </Flex>
@@ -59,84 +69,3 @@ const NewsFeed = (props: Props) => {
 };
 
 export default NewsFeed;
-
-const dummyNewsFeed = [
-  {
-    key: "1",
-    channelName: "Euronews",
-    tag: "Election",
-    title: "Campaign Promise: End War in Ukraine Effortlessly",
-    createdAt: "2021-10-10T12:00:00Z",
-    thumbnail: "thumbnail1.png",
-    isLive: true,
-  },
-  {
-    key: "2",
-    channelName: "Sky News",
-    tag: "Election",
-    title: "Election in Mozambique prompts caution for South Africans",
-    createdAt: "2022-10-28T12:00:00Z",
-    thumbnail: "thumbnail2.png",
-    isLive: false,
-  },
-  {
-    key: "3",
-    channelName: "RT",
-    tag: "Election",
-    title:
-      "Potential Mediator Emerges as Bridge between Europe Trump Relationship.",
-    createdAt: "2021-11-10T12:00:00Z",
-    thumbnail: "thumbnail3.png",
-    isLive: false,
-  },
-  {
-    key: "4",
-    channelName: "Euronews",
-    tag: "Election",
-    title: "Campaign Promise: End War in Ukraine Effortlessly",
-    createdAt: "2023-10-10T12:00:00Z",
-    thumbnail: "thumbnail1.png",
-    isLive: false,
-  },
-  {
-    key: "5",
-    channelName: "Sky News",
-    tag: "Election",
-    title: "Election in Mozambique prompts caution for South Africans",
-    createdAt: "2024-10-28T12:00:00Z",
-    thumbnail: "thumbnail2.png",
-    isLive: false,
-  },
-  {
-    key: "6",
-    channelName: "RT",
-    tag: "Election",
-    title:
-      "Potential Mediator Emerges as Bridge between Europe Trump Relationship.",
-    createdAt: "2021-11-10T12:00:00Z",
-    thumbnail: "thumbnail3.png",
-    isLive: false,
-  },
-  {
-    key: "7",
-    channelName: "Euronews",
-    tag: "Election",
-    title: "Campaign Promise: End War in Ukraine Effortlessly",
-    createdAt: "2024-11-10T12:00:00Z",
-    thumbnail: "thumbnail1.png",
-    isLive: false,
-  },
-  {
-    key: "8",
-    channelName: "Sky News",
-    tag: "Election",
-    title: "Election in Mozambique prompts caution for South Africans",
-    createdAt: "2024-08-28T12:24:00Z",
-    thumbnail: "thumbnail2.png",
-    isLive: false,
-  },
-];
-
-const dummyNewsFeedSortTime = dummyNewsFeed.sort((a, b) => {
-  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-});

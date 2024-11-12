@@ -1,5 +1,7 @@
+"use client";
 import { calcTimePassed } from "@/utils/common";
 import { Box, Flex, Text } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   channelName: string;
@@ -18,8 +20,12 @@ const NewsCard = ({
   thumbnail,
   title,
 }: Props) => {
+  const router = useRouter();
   return (
     <Flex
+      onClick={() => {
+        router.push("/news/1");
+      }}
       cursor={"pointer"}
       gap={"14px"}
       flexDirection={"column"}

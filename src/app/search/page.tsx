@@ -2,12 +2,39 @@
 import Hero from "@/components/Hero";
 import NewsFeed from "@/components/NewsFeed";
 import { Flex } from "@chakra-ui/react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const [newsData, setNewsData] = useState<
+    {
+      key: string;
+      channelName: string;
+      tag: string;
+      title: string;
+      createdAt: string;
+      thumbnail: string;
+      isLive: boolean;
+    }[]
+  >(dummyNewsFeedSortTime);
+
+  useEffect(() => {
+    const query = searchParams.get("q");
+    if (query) {
+      const filteredData = dummyNewsFeedSortTime.filter((item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()),
+      );
+      setNewsData(filteredData);
+    } else {
+      setNewsData(dummyNewsFeedSortTime);
+    }
+  }, [searchParams]);
+
   return (
     <Flex direction={"column"} flex={1}>
       <Hero />
-      <NewsFeed newsFeed={dummyNewsFeedSortTime} />
+      <NewsFeed newsFeed={newsData} />
     </Flex>
   );
 }

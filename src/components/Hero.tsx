@@ -1,8 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Search from "./ui/Search";
 
-type Props = {};
-
 const trendingTags = [
   "Donald Trump",
   "Election",
@@ -12,7 +10,7 @@ const trendingTags = [
   "Politics",
 ];
 
-const Hero = (props: Props) => {
+const Hero = () => {
   return (
     <Flex
       flex={1}
