@@ -22,11 +22,33 @@ const NewsFeed = ({ newsFeed }: Props) => {
   const [selectedNewsFilter, setSelectedNewsFilter] = useState("All");
   return (
     <Flex flexDirection="column" marginY={"12px"} gap={"12px"}>
-      <Flex align={"center"} py={"12px"}>
-        <Text fontSize={22} fontWeight={700}>
-          Recent News
-        </Text>
-        <Flex gap={"12px"} ml={"auto"}>
+      <Flex
+        align={"center"}
+        flexDirection={["column", "column", "row"]}
+        py={"12px"}
+        gap={"12px"}
+      >
+        <Flex gap={"24px"}>
+          <Text fontSize={22} fontWeight={700}>
+            Recent News
+          </Text>
+          <Flex
+            hideFrom={"md"}
+            alignSelf={"center"}
+            gap={"8px"}
+            align={"center"}
+          >
+            <Text fontWeight={700} fontSize={"14px"}>
+              Auto
+            </Text>
+            <Switch size={"md"} colorPalette={"pink"} />
+          </Flex>
+        </Flex>
+        <Flex
+          flexWrap={["wrap", "wrap", "nowrap"]}
+          gap={"12px"}
+          ml={["0px", "0px", "auto"]}
+        >
           {newsFilter.map((filter) => (
             <Box
               key={filter}
@@ -34,8 +56,8 @@ const NewsFeed = ({ newsFeed }: Props) => {
               onClick={() => setSelectedNewsFilter(filter)}
               userSelect={"none"}
               cursor={"pointer"}
-              py={"12px"}
-              px={"24px"}
+              py={["7px", "8px", "8px", "10px"]}
+              px={["12px", "14px", "18px", "24px"]}
               style={{
                 background:
                   selectedNewsFilter === filter
@@ -51,7 +73,12 @@ const NewsFeed = ({ newsFeed }: Props) => {
               </Text>
             </Box>
           ))}
-          <Flex gap={"8px"} align={"center"}>
+          <Flex
+            hideBelow={"md"}
+            alignSelf={"center"}
+            gap={"8px"}
+            align={"center"}
+          >
             <Text fontWeight={700} fontSize={"14px"}>
               Auto
             </Text>

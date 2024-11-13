@@ -42,6 +42,9 @@ export default function RootLayout({
             <Flex
               padding={"24px"}
               marginRight={"324px"}
+              lgDown={{
+                marginRight: "0px",
+              }}
               position={"relative"}
               top={"52px"}
             >

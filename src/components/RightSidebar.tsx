@@ -94,7 +94,7 @@ const TagItem = ({
   </Flex>
 );
 
-const RightSidebar = (props: Props) => {
+export const SidebarContent = () => {
   const [tagsItem, setTagsItem] = useState(trendingTags.slice(0, 6));
 
   const onShowMore = () => {
@@ -114,9 +114,39 @@ const RightSidebar = (props: Props) => {
     const moreItems = trendingTags.slice(tagsItem.length, trendingTags.length);
     setTagsItem([...tagsItem, ...moreItems]);
   };
+  return (
+    <Flex direction={"column"}>
+      <Text fontSize={"22px"} fontWeight={700}>
+        Trending Tags
+      </Text>
 
+      {tagsItem.map((tag) => (
+        <TagItem {...tag} key={tag.tag} />
+      ))}
+      {tagsItem.length < trendingTags.length && (
+        <Flex
+          cursor={"pointer"}
+          py={"16px"}
+          align={"center"}
+          onClick={onShowMore}
+        >
+          <img
+            style={{ width: "24px", height: "24px" }}
+            src="down-red-chev.png"
+          />
+          <Text fontWeight={700} color={"#F83C50"}>
+            Show more
+          </Text>
+        </Flex>
+      )}
+    </Flex>
+  );
+};
+
+const RightSidebar = (props: Props) => {
   return (
     <Box
+      hideBelow={"lg"}
       position={"fixed"}
       right={0}
       bottom={0}
@@ -130,30 +160,7 @@ const RightSidebar = (props: Props) => {
       paddingBottom={"100px"}
       userSelect={"none"}
     >
-      <Flex direction={"column"}>
-        <Text fontSize={"22px"} fontWeight={700}>
-          Trending Tags
-        </Text>
-        {tagsItem.map((tag) => (
-          <TagItem {...tag} key={tag.tag} />
-        ))}
-        {tagsItem.length < trendingTags.length && (
-          <Flex
-            cursor={"pointer"}
-            py={"16px"}
-            align={"center"}
-            onClick={onShowMore}
-          >
-            <img
-              style={{ width: "24px", height: "24px" }}
-              src="down-red-chev.png"
-            />
-            <Text fontWeight={700} color={"#F83C50"}>
-              Show more
-            </Text>
-          </Flex>
-        )}
-      </Flex>
+      <SidebarContent />
     </Box>
   );
 };

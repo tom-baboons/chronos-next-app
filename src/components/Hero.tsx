@@ -27,7 +27,7 @@ const Hero = () => {
       }}
     >
       <Search />
-      <Flex justify={"center"} gap={"10px"}>
+      <Flex justify={"center"} flexWrap={"wrap"} gap={"10px"}>
         <Text fontSize={"14px"} fontWeight={700}>
           Trending:
         </Text>
